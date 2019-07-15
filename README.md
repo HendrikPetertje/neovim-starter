@@ -5,7 +5,8 @@ Install some dependencies:
 
 ```
 sudo apt update
-sudo apt install vim build-essential cmake python3-dev
+sudo apt remove vim
+sudo apt install vim-nox build-essential cmake python3-dev
 ```
 
 Then clone this repo to the right place:
