@@ -1,0 +1,15 @@
+" Basics
+set title
+set autoread
+
+" Themes and styling
+" set termguicolors
+set background=dark
+let base16colorspace=256
+let g:enable_bold_font = 1
+
+colorscheme Tomorrow-Night-Bright
+set cursorline
+
+" Colour-column to limit myself to 80 characters
+set colorcolumn=80

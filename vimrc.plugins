@@ -1,0 +1,335 @@
+" Some plug config ( mainly for YCM)
+let g:plug_timeout=300
+
+" Start Plug
+call plug#begin('~/.vim/plugged')
+
+" Plugins: Proc.vim shell scripting  and file stuff --------------------------
+Plug 'Shougo/vimproc.vim', {'do': 'make'}
+
+" Plugins: Vim Repeat on steroids
+Plug 'tpope/vim-repeat'
+
+
+" Plugins: Airline -----------------------------------------------------------
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+
+let g:airline_powerline_fonts=1
+let g:airline_theme='base16'
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#tabs_label = 'NeoVim'
+let g:airline#extensions#tabline#formatter = 'unique_tail'
+let g:airline#extensions#tabline#show_splits = 0
+let g:airline#extensions#whitespace#enabled = 0
+let g:airline#extensions#tabline#show_buffers = 0
+let g:airline#extensions#tabline#show_close_button = 0
+set noshowmode
+
+" Plugins: Theme
+Plug 'ChrisKempson/Tomorrow-Theme'
+
+" Plugins: Indent Guides -----------------------------------------------------
+Plug 'vim-scripts/Indent-Guides'
+colorscheme default
+
+" indent-guides settings
+let g:indent_guides_start_level = 2
+let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_guide_size = 1
+let g:indent_guides_color_change_percent = 5
+
+" Plugins: NerdTree base -----------------------------------------------------
+Plug 'scrooloose/nerdtree'
+
+" Plugins: NerdTree-git ------------------------------------------------------
+Plug 'Xuyuanp/nerdtree-git-plugin'
+
+" Plugins: NerdTree Tabs -----------------------------------------------------
+Plug 'jistr/vim-nerdtree-tabs'
+
+" Ctrl-P to Display the file browser tree
+nmap <C-P> :NERDTreeTabsToggle<CR>
+
+" ,p to show current file in the tree
+nmap <leader>p :NERDTreeFind<CR>
+
+" Plugins: nerdcommenter -----------------------------------------------------
+
+Plug 'scrooloose/nerdcommenter'
+
+let g:NERDSpaceDelims=1
+let g:NERDDefaultAlign = 'left'
+
+" ,/ to invert comment on the current line/selection
+nmap <leader>/ :call NERDComment(0, "invert")<cr>
+vmap <leader>/ :call NERDComment(0, "invert")<cr>
+
+" Plugins: Ag the silver-sarcher ---------------------------------------------
+Plug 'rking/ag.vim'
+
+nmap <leader>k :Ag<space>
+
+" Plugins: FZF file search ---------------------------------------------------
+if has('unix')
+  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+endif
+Plug 'junegunn/fzf.vim'
+
+if executable("ag") && ('' == $FZF_DEFAULT_COMMAND)
+  let $FZF_DEFAULT_COMMAND = "ag --follow --nocolor --nogroup -g ''"
+endif
+
+set rtp+=/usr/local/opt/fzf/
+
+" :Files with preview
+command! FilesP call fzf#vim#files('', fzf#vim#with_preview('right'))
+nmap <leader>, :FilesP<cr>
+
+" fuzzy-lines
+nmap <leader>l :Lines<cr>
+
+" fuzzy-tags
+nmap <leader>t :Tags<cr>
+nmap <localleader>t :BTags<cr>
+
+" fuzzy-buffers
+nmap <leader>b :Buffers<cr>
+
+" Plugins: CtrlP (on L) ------------------------------------------------------
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'd11wtq/ctrlp_bdelete.vim'
+
+let g:ctrlp_clear_cache_on_exit = 1
+let g:ctrlp_max_height = 20
+" jump to buffer in the same tab if already open
+let g:ctrlp_switch_buffer = 0
+" if in git repo - use git file listing command, should be faster
+" using this option overrides standard CtrlP ignore list based on vim wildignore
+" so use 'grep -v ...' to exclude common image and font files from the search
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files --exclude-standard -cod | grep -viE "\.(png|gif|jpg|gz|woff|eot|tiff|ttf|otf)$"']
+" open multiple files with <c-z> to mark and <c-o> to open. v - opening in
+" vertical splits; j - jump to first open buffer; r - open first in current buffer
+let g:ctrlp_open_multiple_files = 'hjr'
+let g:ctrlp_extensions = ['tag', 'buffertag', 'quickfix', 'mixed', 'line']
+let g:ctrlp_working_path_mode = 'ra'
+" prevent CtrlP from adding the default map
+let g:ctrlp_map = '<c-l>'
+let g:ctrlp_cmd = 'CtrlP'
+map <c-l> :CtrlP <CR>
+
+" Plugins: Greplace files ----------------------------------------------------
+Plug 'vim-scripts/greplace.vim'
+nmap <leader>Gs :Gsearch<cr>
+nmap <leader>GS :Gbuffersearch<cr>
+nmap <leader>Gr :Greplace<cr>
+
+" replace or edit multiple files at once, then use :Greplace to incorporate
+" the changes, followed by :wall to save all modified buffers
+
+if executable("ag")
+  set grepprg=ag
+  let g:grep_cmd_opts = '--line-numbers --noheading'
+endif
+
+" Plugins: Gundo -------------------------------------------------------------
+Plug 'sjl/gundo.vim'
+
+let g:gundo_close_on_revert = 1
+
+nmap <leader>u :GundoToggle<CR>
+
+" Plugins: Vim misc and vim sessions -----------------------------------------
+" vim-misc rate-limits, warns and does other misc tasks
+Plug 'xolox/vim-misc'
+" Vim-session allows to save sessions to later continue with them
+Plug 'xolox/vim-session'
+
+let g:session_autosave = 'no'
+let g:session_autoload = 'no'
+
+nmap <leader>SS :SaveSession
+nmap <leader>SO :OpenSession
+if has('gui_running')
+  nmap <leader>SR :RestartVim<CR>
+endif
+
+" Plugins: Vim Switch --------------------------------------------------------
+Plug 'AndrewRadev/switch.vim'
+
+" Plugins: Urls to links -----------------------------------------------------
+Plug 'vim-scripts/utl.vim'
+
+" config help: <url:~/.config/nvim/plugged/utl_rc.vim#r=utl_cfg_hdl_scm_http>
+if has("mac")
+  let g:utl_cfg_hdl_scm_http_system = "!open '%u'"
+end
+
+nmap <leader>o :Utl <space>
+
+" Plugins: Xterm color table -------------------------------------------------
+Plug 'guns/xterm-color-table.vim'
+
+" Plugins: YouCompleteme Completion ------------------------------------------
+" Base plugin
+function! BuildYCM(info)
+  " info is a dictionary with 3 fields
+  " - name:   name of the plugin
+  " - status: 'installed', 'updated', or 'unchanged'
+  " - force:  set on PlugInstall! or PlugUpdate!
+  if a:info.status == 'installed' || a:info.force
+    !./install.py --clang-completer --tern-completer
+  endif
+endfunction
+
+Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
+
+let g:ycm_key_list_select_completion = ['<TAB>', '<Down>']
+let g:ycm_add_preview_to_completeopt = 1
+let g:ycm_complete_in_comments = 1
+let g:ycm_collect_identifiers_from_comments_and_strings = 1
+let g:ycm_collect_identifiers_from_tags_files = 1
+let g:ycm_seed_identifiers_with_syntax = 1
+let g:ycm_autoclose_preview_window_after_completion = 1
+
+let g:ycm_key_list_select_completion = ['<C-n>', '<C-j>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-p>', '<C-k>', '<Up>']
+
+" supertabs and snippets for completion
+Plug 'SirVer/ultisnips' " Base plugin for snippets
+Plug 'ervandew/supertab'
+Plug 'honza/vim-snippets'
+Plug 'epilande/vim-es2015-snippets'
+Plug 'epilande/vim-react-snippets'
+
+" make YCM compatible with UltiSnips (using supertab)
+let g:SuperTabDefaultCompletionType = '<C-n>'
+
+" better key bindings for UltiSnipsExpandTrigger
+let g:UltiSnipsUsePythonVersion = 2
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+
+" Plugins: yankring ----------------------------------------------------------
+Plug 'vim-scripts/YankRing.vim'
+
+let g:yankring_replace_n_pkey = '<leader>['
+let g:yankring_replace_n_nkey = '<leader>]'
+" put the yankring_history file in ~/.backup
+let g:yankring_history_dir = expand('~/.backup')
+let g:yankring_max_history = 1000
+" ,y to show the yankring
+nmap <leader>y :YRShow<cr>
+let g:yankring_window_height = 20
+
+" Plugins: Delimate & Endwise closing things automatically -------------------
+Plug 'Raimondi/delimitMate'
+Plug 'tpope/vim-endwise'
+
+" Turns on/off the expansion of <Space>
+let g:delimitMate_expand_space = 1
+" Turns on/off the expansion of <CR>
+let g:delimitMate_expand_cr = 1
+
+" Plugins: Editorconfig for those .editorconfig files ------------------------
+Plug 'editorconfig/editorconfig-vim'
+
+" Plugins: Git things done ---------------------------------------------------
+Plug 'tpope/vim-fugitive'
+Plug 'vim-scripts/Merginal'
+
+" ,g for Ggrep
+nmap <leader>g :silent Ggrep<space>
+
+" ,f for global git serach for word under the cursor (with highlight)
+nmap <leader>f :let @/="\\<<C-R><C-W>\\>"<CR>:set hls<CR>:silent Ggrep -w "<C-R><C-W>"<CR>:ccl<CR>:cw<CR><CR>
+
+" same in visual mode
+vmap <leader>f y:let @/=escape(@", '\\[]$^*.')<CR>:set hls<CR>:silent Ggrep -F "<C-R>=escape(@", '\\"#')<CR>"<CR>:ccl<CR>:cw<CR><CR>
+
+Plug 'airblade/vim-gitgutter'
+Plug 'vitaly/vim-gitignore'
+
+" Plugins: Vim surround turning quotes into other things ---------------------
+Plug 'tpope/vim-surround'
+
+" Plugins: Tmux navigator ----------------------------------------------------
+Plug 'christoomey/vim-tmux-navigator'
+let g:tmux_navigator_no_mappings = 1
+nnoremap <silent> <c-w>j :TmuxNavigateDown<cr>
+nnoremap <silent> <c-w>k :TmuxNavigateUp<cr>
+nnoremap <silent> <c-w>l :TmuxNavigateRight<cr>
+nnoremap <silent> <c-w>h :TmuxNavigateLeft<cr>
+
+" Plugins: languages and syntax ----------------------------------------------
+" General languages
+Plug 'ekalinin/Dockerfile.vim'
+Plug 'elixir-lang/vim-elixir'
+Plug 'lambdatoast/elm.vim'
+Plug 'fatih/vim-go'
+Plug 'elzr/vim-json'
+let g:vim_json_syntax_conceal = 0
+Plug 'tpope/vim-markdown'
+Plug 'in3d/vim-raml'
+Plug 'rust-lang/rust.vim'
+Plug 'irrationalistic/vim-tasks'
+Plug 'tsaleh/vim-tmux'
+Plug 'leafgarland/typescript-vim'
+" Javascript
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
+Plug 'mmalecki/vim-node.js'
+
+Plug 'lervag/vimtex'
+let g:vimtex_fold_envs = 0
+let g:vimtex_view_general_viewer = 'skim'
+let g:vimtex_view_general_options = '-r @line @pdf @tex'
+
+" Plugins: Emmet -------------------------------------------------------------
+Plug 'mattn/emmet-vim'
+
+" Plugins: Testing -----------------------------------------------------------
+Plug 'janko-m/vim-test'
+
+let test#strategy = "neovim"
+nmap <leader>t :TestNearest --format documentation<cr>
+nmap <leader>T :TestFile --format documentation<cr>
+
+" Plugins: Ale linter --------------------------------------------------------
+Plug 'w0rp/ale'
+
+" Remaps
+nmap <silent> <C-K> <Plug>(ale_previous_wrap)
+nmap <silent> <C-J> <Plug>(ale_next_wrap)
+" Icons
+let g:ale_sign_error = '⚠'
+let g:ale_sign_warning = '⚐'
+highlight clear ALEErrorSign
+highlight clear ALEWarningSign
+hi link ALEErrorSign    GitGutterDelete
+hi link ALEWarningSign  Todo
+
+" custom linters
+let g:ale_javascript_eslint_executable = 'eslint_d'
+
+" Autofixing
+let g:ale_fixers = {
+\   '*': ['trim_whitespace', 'remove_trailing_lines', 'prettier'],
+\   'javascript': ['eslint'],
+\   'ruby': ['rubocop'],
+\   'markdown': ['prettier'],
+\   'scss': ['stylelint'],
+\   'elixir': ['mix_format']
+\}
+let g:ale_fix_on_save = 1
+
+" Airline integration
+let g:airline#extensions#ale#enabled = 1
+let g:ale_statusline_format = ['⚠ %d', '⚠ %d', '']
+let g:ale_echo_msg_error_str = '⚠'
+let g:ale_echo_msg_warning_str = '⚐'
+
+" End Plug
+call plug#end()
+" Automatically executes 'filetype plugin indent on' and 'syntax enable'

@@ -1,0 +1,14 @@
+# OSX shizzle
+.DS_Store
+
+# Bundled packages
+plugged/
+
+# Secrets
+config/vimrc.secrets
+
+# Spelling
+spell/
+spell
+
+sesions/
