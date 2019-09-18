@@ -25,6 +25,8 @@ pip2 install neovim
 pip3 install neovim neovim-remote flake8
 ```
 
+Install neovim by following this guide: https://github.com/neovim/neovim/wiki/Installing-Neovim
+
 Done? Clone this repo
 
 ```
