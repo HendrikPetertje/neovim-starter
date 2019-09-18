@@ -3,6 +3,9 @@ This is a basic Neovim dotfile meant to help you out getting started with
 Neovim. It contains "enough" to get a lot of cool stuff done, but I hope you'll
 end up customizing it to your own needs and throwing it upside down.
 
+
+![sample](https://i.imgur.com/nckWhp0.png)
+
 ## Installation
 Install some dependencies:
 
