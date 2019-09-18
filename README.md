@@ -66,9 +66,9 @@ there for a while. coc (the code completer) will install some linting extensions
 (you'll see occasional green messages in the bottom of the neovim window detailing the different installed plugins).
 
 Some plugins might require you to install some extra dependencies.
-- AG needs [silver-searcher](https://github.com/ggreer/the_silver_searcher) and
+- AG needs [silver-searcher](https://github.com/ggreer/the_silver_searcher)
+- FZF needs [Command-line Fuzzy Finder](https://github.com/junegunn/fzf) and
   [Bat colours](https://github.com/sharkdp/bat) (optional)
-- FZF needs [Command-line Fuzzy Finder](https://github.com/junegunn/fzf)
 
 ## Features
 ### keys and leaders
