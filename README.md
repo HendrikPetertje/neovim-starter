@@ -11,7 +11,7 @@ I'm assuming that you are on some kind of Debian based system (ubuntu & friends,
 Install some dependencies:
 
 ```
-sudo apt install build-essential cmake python3-dev nodejs python2 python3 python3-pip python-pip ruby-full
+sudo apt install build-essential cmake python3-dev nodejs python2 python3 python3-pip python-pip ruby-full python-neovim python3-neovim
 ```
 
 the system built-in node comes with all kinds of sudo limitations, it's therefore smart to install nodej through either [nodenv](https://github.com/nodenv/nodenv) or [NVM](https://github.com/nvm-sh/nvm) before proceeding with the rest of this isntall guide.
@@ -26,8 +26,6 @@ Then install the Neovim server Depndencies
 
 ```
 gem install neovim (or sudo gem install neovim)
-pip2 install neovim
-pip3 install neovim neovim-remote flake8
 ```
 
 Install neovim by following this guide: https://github.com/neovim/neovim/wiki/Installing-Neovim
