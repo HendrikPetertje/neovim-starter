@@ -3,14 +3,15 @@ This is a basic Neovim dotfile meant to help you out getting started with
 Neovim. It contains "enough" to get a lot of cool stuff done, but I hope you'll
 end up customizing it to your own needs and throwing it upside down.
 
-
 ![sample](https://i.imgur.com/nckWhp0.png)
 
 ## Installation
+I'm assuming that you are on some kind of Debian based system (ubuntu & friends, elementary, pop)
+
 Install some dependencies:
 
 ```
-sudo apt install neovimg build-essential cmake python3-dev nodejs yarn npm python2 python3 python3-pip python2-pip ruby-full
+sudo apt install build-essential cmake python3-dev nodejs yarn npm python2 python3 python3-pip python-pip ruby-full
 ```
 
 If you use Nodenv or other managers to manage NodeJS versions for you, make sure
