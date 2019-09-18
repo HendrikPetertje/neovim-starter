@@ -14,7 +14,7 @@ Install some dependencies:
 sudo apt install build-essential cmake python3-dev nodejs python2 python3 python3-pip python-pip ruby-full python-neovim python3-neovim
 ```
 
-the system built-in node comes with all kinds of sudo limitations, it's therefore smart to install nodej through either [nodenv](https://github.com/nodenv/nodenv) or [NVM](https://github.com/nvm-sh/nvm) before proceeding with the rest of this isntall guide (if you are one of the EcmaNative students, lab 0 has you covered already).
+the system built-in node comes with all kinds of sudo limitations, it's therefore smart to install nodejs through either [nodenv](https://github.com/nodenv/nodenv) or [NVM](https://github.com/nvm-sh/nvm) before proceeding with the rest of this isntall guide (if you are one of the EcmaNative students, lab 0 has you covered already).
 
 When done execute: 
 
