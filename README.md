@@ -45,7 +45,7 @@ Then exit nvim through `:q` and restart it for changes to take effect.
 
 Some plugins might require you to install some extra dependencies.
 - AG needs [silver-searcher](https://github.com/ggreer/the_silver_searcher) and
-  [Bat colours][https://github.com/sharkdp/bat](optional)
+  [Bat colours])https://github.com/sharkdp/bat)(optional)
 - FZF needs [Command-line Fuzzy Finder](https://github.com/junegunn/fzf)
 
 ## Features
