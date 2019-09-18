@@ -11,11 +11,12 @@ I'm assuming that you are on some kind of Debian based system (ubuntu & friends,
 Install some dependencies:
 
 ```
-sudo apt install build-essential cmake python3-dev nodejs yarn npm python2 python3 python3-pip python-pip ruby-full
+sudo apt install build-essential cmake python3-dev nodejs python2 python3 python3-pip python-pip ruby-full
 ```
 
-If you use Nodenv or other managers to manage NodeJS versions for you, make sure
-to install yarn.
+the system built-in node comes with all kinds of sudo limitations, it's therefore smart to install nodej through either [nodenv](https://github.com/nodenv/nodenv) or [NVM](https://github.com/nvm-sh/nvm) before proceeding with the rest of this isntall guide.
+
+When done execute: 
 
 ```
 npm install -g yarn
@@ -24,7 +25,7 @@ npm install -g yarn
 Then install the Neovim server Depndencies
 
 ```
-gem install neovim
+gem install neovim (or sudo gem install neovim)
 pip2 install neovim
 pip3 install neovim neovim-remote flake8
 ```
@@ -39,13 +40,13 @@ mkdir -p ~/.config
 git clone https://github.com/HendrikPetertje/neovim-starter.git ~/.config/nvim
 ```
 
-Start `nvim` (ignore errors) and execute:
+Start `nvim` (ignore errors about Tomorrow-Nigh , etc.) and execute:
 
 ```
 :PlugInstall
 ```
 
-Then exit nvim through `:q` and restart it for changes to take effect.
+Then exit nvim through `:q` and restart it for changes to take effect, then just leave your nvim sitting there for a while. coc (the code completer) will install some linting extensions in the background (you'll see occasional green messages in the bottom of the neovim window detailing the different installed plugins).
 
 Some plugins might require you to install some extra dependencies.
 - AG needs [silver-searcher](https://github.com/ggreer/the_silver_searcher) and
