@@ -2,7 +2,7 @@
 let g:plug_timeout=300
 
 " Start Plug
-call plug#begin('~/.vim/plugged')
+call plug#begin('~/.config/nvim/plugged')
 
 " Plugins: Proc.vim shell scripting  and file stuff --------------------------
 Plug 'Shougo/vimproc.vim', {'do': 'make'}
@@ -27,7 +27,7 @@ let g:airline#extensions#tabline#show_close_button = 0
 set noshowmode
 
 " Plugins: Theme
-Plug 'ChrisKempson/Tomorrow-Theme'
+Plug 'chriskempson/vim-tomorrow-theme'
 
 " Plugins: Indent Guides -----------------------------------------------------
 Plug 'vim-scripts/Indent-Guides'
@@ -170,22 +170,6 @@ nmap <leader>o :Utl <space>
 " Plugins: Xterm color table -------------------------------------------------
 Plug 'guns/xterm-color-table.vim'
 
-" supertabs and snippets for completion
-Plug 'SirVer/ultisnips' " Base plugin for snippets
-Plug 'ervandew/supertab'
-Plug 'honza/vim-snippets'
-Plug 'epilande/vim-es2015-snippets'
-Plug 'epilande/vim-react-snippets'
-
-" make YCM compatible with UltiSnips (using supertab)
-let g:SuperTabDefaultCompletionType = '<C-n>'
-
-" better key bindings for UltiSnipsExpandTrigger
-let g:UltiSnipsUsePythonVersion = 3
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-
 " Plugins: yankring ----------------------------------------------------------
 Plug 'vim-scripts/YankRing.vim'
 
@@ -261,6 +245,87 @@ let test#strategy = "vim"
 nmap <leader>t :TestNearest --format documentation<cr>
 nmap <leader>T :TestFile --format documentation<cr>
 
+" Plugins: Code Completion and lint help -------------------------------------
+Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
+
+let g:coc_global_extensions = [
+  \ 'coc-json', 'coc-pairs', 'coc-eslint',  'coc-tsserver',
+  \ 'coc-html', 'coc-css', 'coc-solargraph', 'coc-yaml', 'coc-emmet',
+  \ 'coc-lists', 'coc-snippets', 'coc-git', 'coc-elixir', 'coc-marketplace',
+  \ 'coc-webpack', 'coc-lua', 'coc-vimlsp', 'coc-docker', 'coc-tslint']
+
+let g:coc_user_config = {
+  \ "diagnostic.errorSign": '⚠',
+  \ "diagnostic.warningSign": '⚐',
+  \ "diagnostic.infoSign": '⚐',
+  \ "diagnostic.hintSign": '⚐',
+  \ "coc.preferences.enableFloatHighlight": v:false,
+  \ }
+
+let g:airline#extensions#coc#enabled = 1
+let airline#extensions#coc#stl_format_err = '%E{[%e(#%fe)] }'
+let airline#extensions#coc#stl_format_warn = '%W{[%w(#%fw)]} '
+" highlight clear CocErrorSign
+" highlight clear CocWarningSign
+" hi link CocErrorSign GitGutterDelete
+" hi link CocWarningSign  WarningMsg
+
+" if hidden is not set, TextEdit might fail.
+" set hidden
+
+" Some servers have issues with backup files, see #649
+set nobackup
+set nowritebackup
+
+" don't give |ins-completion-menu| messages.
+set shortmess+=c
+
+" You will have bad experience for diagnostic messages when it's default 4000.
+set updatetime=300
+
+" always show signcolumns
+set signcolumn=yes
+
+" Use tab for trigger completion with characters ahead and navigate.
+" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" Remap for rename current word
+nmap <leader>rn <Plug>(coc-rename)
+
+" Highlight symbol under cursor on CursorHold
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Jumpers - I'll remove some of those sometime
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Next and previous navigation
+nmap <silent><leader>m  <Plug>(coc-diagnostic-next)
+nmap <silent><leader>M  <Plug>(coc-diagnostic-prev)
+
 " Plugins: Ale linter --------------------------------------------------------
 Plug 'w0rp/ale'
 
@@ -275,18 +340,27 @@ highlight clear ALEWarningSign
 hi link ALEErrorSign    GitGutterDelete
 hi link ALEWarningSign  Todo
 
-" custom linters
-let g:ale_javascript_eslint_executable = 'eslint_d'
+" Dissabled linters (since COC takes care of these)
+let g:ale_linters = {
+  \  'css':        [],
+  \  'javascript': [],
+  \  'typescript': [],
+  \  'json':       [],
+  \  'scss':       [],
+  \  'yaml':       []
+  \ }
 
 " Autofixing
 let g:ale_fixers = {
-\   '*': ['trim_whitespace', 'remove_trailing_lines', 'prettier'],
-\   'javascript': ['eslint'],
-\   'ruby': ['rubocop'],
-\   'markdown': ['prettier'],
-\   'scss': ['stylelint'],
-\   'elixir': ['mix_format']
-\}
+  \ '*': ['trim_whitespace', 'remove_trailing_lines'],
+  \ 'javascript': ['eslint'],
+  \ 'typescript': ['eslint', 'tslint'],
+  \ 'ruby': ['rubocop'],
+  \ 'markdown': ['prettier'],
+  \ 'scss': ['stylelint'],
+  \ 'elixir': ['mix_format']
+  \ }
+
 let g:ale_fix_on_save = 1
 
 " Airline integration
