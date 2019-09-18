@@ -30,6 +30,22 @@ gem install neovim (or sudo gem install neovim)
 
 Install neovim by following this guide: https://github.com/neovim/neovim/wiki/Installing-Neovim
 
+
+Note: at the time of this writing neovim 0.4 was just released. Some dependencies in Neovim-starter 
+depend on this newer version of neovim. if you are on ubuntu, you could consider to do like this:
+
+```
+mkdir -p ~/.config
+cd ~/.config
+curl -LO https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage
+chmod u+x nvim.appimage
+sudo ln -s "$PWD/nvim.appimage" /usr/bin/nvim
+cd
+```
+
+Once Debian & Ubuntu start offering simply `rm /usr/bin/nvim` and `sudo apt install neovim` to 
+get back on the "system official builds"
+
 Done? Clone this repo
 
 ```
@@ -44,7 +60,9 @@ Start `nvim` (ignore errors about Tomorrow-Nigh , etc.) and execute:
 :PlugInstall
 ```
 
-Then exit nvim through `:q` and restart it for changes to take effect, then just leave your nvim sitting there for a while. coc (the code completer) will install some linting extensions in the background (you'll see occasional green messages in the bottom of the neovim window detailing the different installed plugins).
+Then exit nvim through `:q` and restart it for changes to take effect, then just leave your nvim sitting 
+there for a while. coc (the code completer) will install some linting extensions in the background 
+(you'll see occasional green messages in the bottom of the neovim window detailing the different installed plugins).
 
 Some plugins might require you to install some extra dependencies.
 - AG needs [silver-searcher](https://github.com/ggreer/the_silver_searcher) and
