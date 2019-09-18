@@ -59,8 +59,8 @@ Silent-Leader is mapped to `\`.
 For the sake of simplicity there is only 1 clipboard in this configuration. If
 you copy something you can simply paste it into vim with `p`, you can copy
 things by `d`eleting them or copying (yanking) selections using `y`. 
-Check out line 6 in `vimrc.standards` if you wish to take of the "training 
-wheels".
+Check out line 6 in `vimrc.standards` if you wish to take the "training 
+wheels" off.
 
 Note.
 In this document I describe the use of short-cuts.. Like `,cu`. these commands
