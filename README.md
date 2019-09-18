@@ -61,9 +61,9 @@ Start `nvim` (ignore errors about Tomorrow-Nigh , etc.) and execute:
 :PlugInstall
 ```
 
-Then exit nvim through `:q` and restart it for changes to take effect, then just leave your nvim sitting 
-there for a while. coc (the code completer) will install some linting extensions in the background 
-(you'll see occasional green messages in the bottom of the neovim window detailing the different installed plugins).
+Then exit nvim through `:q` and restart it for changes to take effect.
+
+*then just leave your nvim sitting there for a while*. CoC (the code completer) will install some linting extensions in the background (you'll see occasional green messages in the bottom of the neovim window detailing the different installed plugins).
 
 Some plugins might require you to install some extra dependencies.
 - AG needs [silver-searcher](https://github.com/ggreer/the_silver_searcher)
