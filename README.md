@@ -30,9 +30,9 @@ gem install neovim (or sudo gem install neovim)
 
 Install neovim by following this guide: https://github.com/neovim/neovim/wiki/Installing-Neovim
 
-
+_____________________
 Note: at the time of this writing neovim 0.4 was just released. Some dependencies in Neovim-starter 
-depend on this newer version of neovim. if you are on ubuntu, you could consider to do like this:
+depend on this newer version of neovim. if you are on ubuntu, you could consider doing something like this:
 
 ```
 mkdir -p ~/.config
@@ -45,6 +45,7 @@ cd
 
 Once Debian & Ubuntu start offering simply `rm /usr/bin/nvim` and `sudo apt install neovim` to 
 get back on the "system official builds"
+_____________________
 
 Done? Clone this repo
 
