@@ -43,7 +43,7 @@ sudo ln -s "$PWD/nvim.appimage" /usr/bin/nvim
 cd
 ```
 
-Once Debian & Ubuntu start offering simply `rm /usr/bin/nvim` and `sudo apt install neovim` to 
+Once Debian & Ubuntu start offering 0.4, simply `rm /usr/bin/nvim` and `sudo apt install neovim` to 
 get back on the "system official builds"
 _____________________
 
