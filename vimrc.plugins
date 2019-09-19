@@ -259,6 +259,7 @@ let g:coc_user_config = {
   \ "diagnostic.warningSign": '⚐',
   \ "diagnostic.infoSign": '⚐',
   \ "diagnostic.hintSign": '⚐',
+  \ "diagnostic.signOffset": 100,
   \ "coc.preferences.enableFloatHighlight": v:false,
   \ }
 
